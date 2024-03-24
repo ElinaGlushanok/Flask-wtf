@@ -43,6 +43,11 @@ def login():
         return redirect('/success')
     return flask.render_template('login.html', title="Login", form=form)
 
+@app.route('/destribution')
+def destribution():
+    names = ["Ридли Скотт", "Энди Уир", "Марк Уотни", "Венката Капур",
+             "Тедди Сандерс", "Шон Бин"]
+    return flask.render_template('cabins.html', title="Destribution", astronauts=names)
 
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
