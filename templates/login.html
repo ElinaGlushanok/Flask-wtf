@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="margin-left:100px;"><img class="icon" src="/static/image/MARS-2-7.png" alt="иконка">
+Аварийный доступ</h1>
+<form action="" method="post" novalidate>
+    {% for name in ["астронавта", "капитана"] %}
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }} {{name}}<br>
+        {{ form.username(class="form-control") }}<br>
+        {% for error in form.username.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }} {{name}}<br>
+        {{ form.password(class="form-control", type="password") }}<br>
+        {% for error in form.password.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}
+    </p>
+    {% endfor %}
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+{% endblock %}

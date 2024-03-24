@@ -2,3 +2,12 @@ h4 {
     color: #FFA07A;
     margin-left: 20px;
 }
+
+p {
+    margin-left: 100px;
+}
+
+.icon{
+    width:100px;
+    height:50px;
+}

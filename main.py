@@ -1,7 +1,20 @@
 import flask
-from flask import url_for
+from flask import url_for, redirect
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired
+
 
 app = flask.Flask(__name__)
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+
+class LoginForm(FlaskForm):
+    username = StringField('id', validators=[DataRequired()])
+    password = PasswordField('Пароль', validators=[DataRequired()])
+    remember_me = BooleanField('Запомнить меня')
+    submit = SubmitField('Войти')
 
 @app.route('/')
 @app.route('/index/<string:title>')
@@ -22,6 +35,13 @@ def answer():
            'sex': ['Пол', ans[4]], 'motivation': ['Мотивация', ans[5]],
            'ready' : ['Готовы остаться на Марсе?', ans[6]]}
     return flask.render_template('auto_answer.html', answer=answer)
+
+@app.route('/login')
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect('/success')
+    return flask.render_template('login.html', title="Login", form=form)
 
 
 if __name__ == '__main__':
